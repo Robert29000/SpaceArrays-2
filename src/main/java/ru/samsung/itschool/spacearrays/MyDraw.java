@@ -17,9 +17,9 @@ public class MyDraw extends View implements View.OnClickListener {
 
 	public MyDraw(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		//sk=new Sky();
-		//sk.makeSky();
-		plan=new Planeta();
+		sk=new Sky();
+		sk.makeSky();
+
 
 		objects.add(new Circle(500,888));
 		objects.add(new Circle(50,150));
@@ -27,36 +27,25 @@ public class MyDraw extends View implements View.OnClickListener {
 		objects.add(new MyRect(750,50));
 	}
 
-	//@Override
-	//public boolean onTouchEvent(MotionEvent event) {
-	//	if(n==99)
-	//		n=0;
-	//	rocket[n]=new ControllerRocket(event.getX(),event.getY());
-	//	n++;
-	//	return super.onTouchEvent(event);
-	//}
+
 	ArrayList objects=new ArrayList();
-	//Sky sk;
-	//ControllerRocket[] rocket=new ControllerRocket[100];
-	Planeta plan;
-	ControllerRocket rocket=new ControllerRocket();
-	//int n=0;
+	Sky sk;
+
+	ControllerRocket rocket;
+
 	@Override
 	protected void onDraw(Canvas canvas) {
-		    //sk.drawSky(canvas);
-		    plan.drawErth(canvas);
-			plan.move();
-		    //for(int i=0;i<n;i++){
-			//	rocket[i].draw(canvas);
-			//	rocket[i].move();
-			//}
+
+			sk.drawSky(canvas);
 			for(Object obj:objects){
 			if(obj instanceof Drawable){
 				((Drawable)obj).draw(canvas);
 				}
 			}
-			rocket.draw(canvas);
-			rocket.move();
+			if(n==1) {
+				rocket.draw(canvas);
+				rocket.move();
+			}
 			invalidate();
 	}
 
@@ -64,22 +53,36 @@ public class MyDraw extends View implements View.OnClickListener {
 		float res=(float)((Math.random()*(b-a)+a));
 		return res;
 	}
-
+	private int n=0;
 	public boolean onTouchEvent(MotionEvent event){
-		rocket.setTarget(event.getX(),event.getY());
-		for(Object obj:objects){
-			if(obj instanceof Touchable){
-				((Touchable)obj).OnTouch(event);
-			}
-		}
+		rocket=new ControllerRocket(event.getX(),event.getY());
+		n=1;
+		//for(Object obj:objects){
+		//	if(obj instanceof Touchable){
+		//		((Touchable)obj).OnTouch(event);
+		//	}
+		//}
 		return super.onTouchEvent(event);
 	}
 
 	@Override
 	public void onClick(View view) {
-		for(Object obj:objects){
-			if(obj instanceof OnClickListener){
-				((OnClickListener)obj).onClick(view);
+		if(n==1) {
+			switch (view.getId()) {
+				case R.id.magicbutton:
+					rocket.setVx(rocket.getVx()+0.2f);
+					rocket.setVy(rocket.getVy()+0.2f);
+					break;
+				case R.id.button2:
+					rocket.setVx(rocket.getVx()-0.2f);
+					rocket.setVy(rocket.getVy()-0.2f);
+					break;
+				case R.id.rightbutton:
+					rocket.setDegrees(rocket.getDegrees()+0.04f);
+					break;
+				case R.id.leftbotton:
+					rocket.setDegrees(rocket.getDegrees()-0.04f);
+					break;
 			}
 		}
 	}

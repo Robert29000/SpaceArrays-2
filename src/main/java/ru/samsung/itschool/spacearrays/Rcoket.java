@@ -11,9 +11,9 @@ import android.graphics.Paint;
  */
 
 public class Rcoket {
-    public float x,y;
-    public float vx,vy;
-
+    private float x,y;
+    private float vx,vy;
+    private float degrees=1;
     public float getX() {
         return x;
     }
@@ -24,6 +24,21 @@ public class Rcoket {
 
     public void setVx(float vx) {
         this.vx = vx;
+    }
+
+    public float getVx() {
+        return vx;
+    }
+
+    public float getVy() {
+        return vy;
+    }
+    public void setDegrees(float degrees) {
+        this.degrees = degrees;
+    }
+
+    public float getDegrees() {
+        return degrees;
     }
 
     public void setVy(float vy) {
@@ -41,7 +56,7 @@ public class Rcoket {
     {
         matrix.setScale(0.2f, 0.2f);
         //Study mathematics, dear young programmer :)
-        matrix.postRotate((float)Math.toDegrees(Math.atan2(vy, vx)) + 45);
+        matrix.postRotate((float)Math.toDegrees(degrees));
         matrix.postTranslate(x, y);
         paint.setAlpha(255);
         canvas.drawBitmap(pic, matrix, paint);
@@ -49,19 +64,9 @@ public class Rcoket {
     Rcoket(float x,float y ){
         this.x=x;
         this.y=y;
-        this.vx=MyDraw.getRandom(-5,5);
-        this.vy=MyDraw.getRandom(-5,5);
+        this.vx=MyDraw.getRandom(0.1f,1);
+        this.vy=MyDraw.getRandom(0.1f,1);
     }
-   // Rcoket(Rcoket rocket){
-    //   this.x=rocket.x;
-    //    this.y=rocket.y;
-    //    this.vx=-rocket.vx;
-    //    this.vy=-rocket.vx;
-    //}
-    Rcoket(){
-        this.x=MyDraw.getRandom(0,350);
-        this.y=MyDraw.getRandom(0,350);
-        this.vx=MyDraw.getRandom(-5,5);
-        this.vy=MyDraw.getRandom(-5,5);
-    }
+
+
 }

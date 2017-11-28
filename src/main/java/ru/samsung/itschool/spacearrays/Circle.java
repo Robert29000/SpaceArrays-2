@@ -9,7 +9,7 @@ import android.view.MotionEvent;
  */
 
 public class Circle implements Drawable,Touchable{
-    float x,y,r=20;
+  protected   float x,y,r=20;
     Paint p=new Paint();
 
    public void draw(Canvas canvas){

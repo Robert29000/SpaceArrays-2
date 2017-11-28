@@ -9,14 +9,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
          />
+
     <Button
         android:id="@+id/magicbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/button2"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="Magic"
+        android:layout_marginEnd="83dp"
+        android:layout_marginRight="83dp"
         android:onClick="Makemagic"
-        />
+        android:text="Up" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/magicbutton"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/magicbutton"
+        android:onClick="goDown"
+        android:text="Down" />
+    <Button
+        android:id="@+id/rightbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/button2"
+        android:text="Right"
+        android:onClick="goRight"
+        android:layout_alignParentBottom="true"/>
+    <Button
+        android:id="@+id/leftbotton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/button2"
+        android:text="Left"
+        android:onClick="goLeft"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

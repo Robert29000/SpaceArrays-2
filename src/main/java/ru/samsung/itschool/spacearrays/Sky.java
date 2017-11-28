@@ -11,9 +11,9 @@ import android.graphics.Paint;
 public class Sky {
 
     final int numStars = 500;
-    int xStar[] = new int[numStars];
-    int yStar[] = new int[numStars];
-    int alphaStar[] = new int[numStars];
+    private  int xStar[] = new int[numStars];
+    private   int yStar[] = new int[numStars];
+    private     int alphaStar[] = new int[numStars];
     void makeSky()
     {
         // Звезды генерируются в зоне maxX на maxY

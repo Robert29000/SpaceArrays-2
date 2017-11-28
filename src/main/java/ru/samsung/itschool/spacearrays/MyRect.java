@@ -10,7 +10,7 @@ import android.view.View;
  */
 
 public class MyRect implements Drawable ,Touchable,View.OnClickListener{
-    float x,y,size=20;
+   protected float x,y,size=20;
     Paint p=new Paint();
 
     public MyRect(float x, float y) {
