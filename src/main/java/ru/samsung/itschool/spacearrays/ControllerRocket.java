@@ -5,11 +5,23 @@ package ru.samsung.itschool.spacearrays;
  */
 
 public class ControllerRocket extends Rcoket {
-    ControllerRocket(float x,float y){
+    private float toX,toY;
+
+
+    ControllerRocket(float x, float y){
         super(x,y);
-
+        setVx(0);
+        setVy(0);
     }
-
+    void setTarget(float toX,float toY){
+        this.toX=toX;
+        this.toY=toY;
+        setVx(toX-getX());
+        setVy(toY-getY());
+        float d=(float)(Math.sqrt(getVx()*getVx()+getVy()*getVy()));
+        setVx((getVx()/d)*5);
+        setVy((getVy()/d)*5);
+    }
     void move(){
         super.move();
     }

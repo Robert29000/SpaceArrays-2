@@ -20,17 +20,19 @@
         android:layout_marginEnd="83dp"
         android:layout_marginRight="83dp"
         android:onClick="Makemagic"
-        android:text="Up" />
+        android:text="Spawn" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/magicbutton"
         android:layout_alignLeft="@+id/magicbutton"
         android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/magicbutton"
         android:layout_alignStart="@+id/magicbutton"
         android:onClick="goDown"
-        android:text="Down" />
+        android:text="Action" />
     <Button
         android:id="@+id/rightbutton"
         android:layout_width="wrap_content"

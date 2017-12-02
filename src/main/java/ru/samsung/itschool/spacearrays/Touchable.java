@@ -9,5 +9,5 @@ import android.view.MotionEvent;
  */
 
 public interface Touchable {
-     void OnTouch(MotionEvent event);
+     void OnTouch();
 }

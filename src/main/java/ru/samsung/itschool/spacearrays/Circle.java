@@ -1,26 +1,37 @@
 package ru.samsung.itschool.spacearrays;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.graphics.Color;
 import android.view.MotionEvent;
 
 /**
- * Created by student2 on 27.11.17.
+ * Created by melikyan on 02.12.17.
  */
 
-public class Circle implements Drawable,Touchable{
-  protected   float x,y,r=20;
-    Paint p=new Paint();
-
-   public void draw(Canvas canvas){
-        canvas.drawCircle(x,y,r,p);
+public class Circle extends Figure implements Drawable ,Touchable{
+    private float radius,cx,cy,degree;
+    Circle(float x,float y){
+        super(x,y);
+        radius=MyDraw.getRandom(10,200);
+        cx=x-10;
+        cy=y-10;
+        degree=0;
+    }
+    @Override
+    public void draw(Canvas canvas) {
+        p.setColor(Color.RED);
+        if(t==1){
+            degree+=0.01;
+            setX((float)(radius*Math.cos(degree)+cx));
+            setY((float)(radius*Math.sin(degree)+cy));
+        }
+        canvas.drawCircle(getX(),getY(),radius,p);
+    }
+    int t=0;
+    @Override
+    public void OnTouch() {
+        t=1;
     }
 
-    public Circle(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-    public void OnTouch(MotionEvent event){
-        r+=20;
-    }
+
 }

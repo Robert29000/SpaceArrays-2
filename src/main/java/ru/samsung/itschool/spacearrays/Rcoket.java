@@ -13,7 +13,7 @@ import android.graphics.Paint;
 public class Rcoket {
     private float x,y;
     private float vx,vy;
-    private float degrees=1;
+    private float degrees=0;
     public float getX() {
         return x;
     }
@@ -56,7 +56,7 @@ public class Rcoket {
     {
         matrix.setScale(0.2f, 0.2f);
         //Study mathematics, dear young programmer :)
-        matrix.postRotate((float)Math.toDegrees(degrees));
+        matrix.postRotate((float)Math.toDegrees(Math.atan2(vy,vx)+45));
         matrix.postTranslate(x, y);
         paint.setAlpha(255);
         canvas.drawBitmap(pic, matrix, paint);
@@ -64,8 +64,9 @@ public class Rcoket {
     Rcoket(float x,float y ){
         this.x=x;
         this.y=y;
-        this.vx=MyDraw.getRandom(0.1f,1);
-        this.vy=MyDraw.getRandom(0.1f,1);
+        this.vx=MyDraw.getRandom(-5,2);
+        this.vy=MyDraw.getRandom(-5,2);
+        this.matrix.postRotate((float)Math.toDegrees(Math.atan2(vx,vy)+45));
     }
 
 

@@ -3,7 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@drawable/rocket"
+    android:background="#FFFFFF"
     >
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/earth"
+        android:contentDescription="@string/earth" />
 </LinearLayout>

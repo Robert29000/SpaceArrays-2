@@ -1,5 +1,6 @@
 package ru.samsung.itschool.spacearrays;
 
+import android.app.RemoteInput;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class MyDraw extends View implements View.OnClickListener {
 
@@ -19,33 +21,33 @@ public class MyDraw extends View implements View.OnClickListener {
 		super(context, attrs);
 		sk=new Sky();
 		sk.makeSky();
-
-
-		objects.add(new Circle(500,888));
-		objects.add(new Circle(50,150));
-		objects.add(new MyRect(300,300));
-		objects.add(new MyRect(750,50));
+		objects.add(new Circle(100,300));
+		objects.add(new Rect(200,500));
+		objects.add(new Triangle(40,70));
 	}
 
 
-	ArrayList objects=new ArrayList();
 	Sky sk;
-
+	ArrayList objects=new ArrayList();
 	ControllerRocket rocket;
-
+	Rcoket[] manyrocket=new Rcoket[100];
 	@Override
 	protected void onDraw(Canvas canvas) {
-
 			sk.drawSky(canvas);
-			for(Object obj:objects){
-			if(obj instanceof Drawable){
-				((Drawable)obj).draw(canvas);
-				}
+		for (Object i : objects) {
+			if (i instanceof Drawable) {
+				((Drawable) i).draw(canvas);
 			}
-			if(n==1) {
+		}
+			for(int i=0;i <t;i++){
+				manyrocket[i].draw(canvas);
+				manyrocket[i].move();
+			}
+			if(n!=0) {
 				rocket.draw(canvas);
 				rocket.move();
 			}
+
 			invalidate();
 	}
 
@@ -55,33 +57,37 @@ public class MyDraw extends View implements View.OnClickListener {
 	}
 	private int n=0;
 	public boolean onTouchEvent(MotionEvent event){
-		rocket=new ControllerRocket(event.getX(),event.getY());
-		n=1;
-		//for(Object obj:objects){
-		//	if(obj instanceof Touchable){
-		//		((Touchable)obj).OnTouch(event);
-		//	}
-		//}
-		return super.onTouchEvent(event);
-	}
+		if(n==0) {
+			rocket = new ControllerRocket(event.getX(), event.getY());
+			n = 1;
+			return super.onTouchEvent(event);
+		}else {
+			rocket.setTarget(event.getX(),event.getY());
 
+		return true;}
+	}
+	int t=0;
 	@Override
 	public void onClick(View view) {
+		if(view.getId()==R.id.magicbutton){
+			manyrocket[t]=new Rcoket(getRandom(10,1000),getRandom(10,1000));
+			t++;
+		}
+		else if(view.getId()==R.id.button2){
+			for(Object i:objects){
+				if(i instanceof Touchable)
+					((Touchable)i).OnTouch();
+			}
+		}
 		if(n==1) {
 			switch (view.getId()) {
-				case R.id.magicbutton:
-					rocket.setVx(rocket.getVx()+0.2f);
-					rocket.setVy(rocket.getVy()+0.2f);
-					break;
-				case R.id.button2:
-					rocket.setVx(rocket.getVx()-0.2f);
-					rocket.setVy(rocket.getVy()-0.2f);
-					break;
 				case R.id.rightbutton:
-					rocket.setDegrees(rocket.getDegrees()+0.04f);
+					rocket.setVx(rocket.getVx()+0.5f);
+					rocket.setVy(rocket.getVy()+0.5f);
 					break;
 				case R.id.leftbotton:
-					rocket.setDegrees(rocket.getDegrees()-0.04f);
+					rocket.setVx(rocket.getVx()-0.5f);
+					rocket.setVy(rocket.getVy()-0.5f);
 					break;
 			}
 		}
